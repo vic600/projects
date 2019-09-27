@@ -28,21 +28,26 @@ module.exports = (router) => {
                     },
                     function (error, response, body) {
                         if (error) {
-                            console.log(error);
+                           res.json({success:false,message:error})
 
                         } else {
 
-                            //console.log(req.headers.cookie.trim());
+                       
 
 
                             if (response.statusCode != 200) {
-                                res.json({ message: response.statusCode })
+                                res.json({success:false,message: response.statusCode })
                             } else {
-                                try {
-                                    res.json(JSON.parse(body)).status(200)
-                                } catch (error) {
-                                    res.json({ success: false, message: 'invalid response' })
+                                if (!body.error) {
+                                     // try {
+                                        res.json({success:true,message:body.result,session:response.headers}).status(200)
+                                        // } catch (error) {
+                                        //     res.json({ success: false, message: 'invalid response' })
+                                        // }
+                                } else {
+                                    res.json({success:false,message:body.error.data.message})
                                 }
+                              
 
                             }
                         }
@@ -70,17 +75,22 @@ module.exports = (router) => {
                 },
                 function (error, response, body) {
                     if (error) {
-                        console.log(error);
-
+                   res.json({success:false,message:error})
                     } else {
+                       
                         if (response.statusCode != 200) {
-                            res.json({ success: false, message: response.statusCode })
+                            res.json({success:false,message: response.statusCode })
                         } else {
-                            try {
-                                res.json(JSON.parse(body)).status(200)
-                            } catch (error) {
-                                res.json({ success: false, message: 'invalid response' })
+                            if (!body.error) {
+                                 // try {
+                                    res.json({success:true,message:JSON.parse(body)}).status(200)
+                                    // } catch (error) {
+                                    //     res.json({ success: false, message: 'invalid response' })
+                                    // }
+                            } else {
+                                res.json({success:false,message:body.error.data.message})
                             }
+                          
 
                         }
 
@@ -110,17 +120,22 @@ module.exports = (router) => {
                 },
                 function (error, response, body) {
                     if (error) {
-                        console.log(error);
+                       res.json({success:false,message:error})
 
                     } else {
                         if (response.statusCode != 200) {
-                            res.json({ success: false, message: response.statusCode })
+                            res.json({success:false,message: response.statusCode })
                         } else {
-                            try {
-                                res.json(JSON.parse(body)).status(response.statusCode)
-                            } catch (error) {
-                                res.json({ success: false, message: 'invalid response' })
+                            if (!body.error) {
+                                 // try {
+                                    res.json({success:true,message:JSON.parse(body)}).status(200)
+                                    // } catch (error) {
+                                    //     res.json({ success: false, message: 'invalid response' })
+                                    // }
+                            } else {
+                                res.json({success:false,message:body.error.data.message})
                             }
+                          
 
                         }
 
@@ -159,7 +174,7 @@ module.exports = (router) => {
                 },
                 function (error, response, body) {
                     if (error) {
-                        console.log(error);
+                       res.json({success:false,message:error})
   
                     } else {
   
@@ -167,14 +182,19 @@ module.exports = (router) => {
   
   
                         if (response.statusCode != 200) {
-                            res.json({success:false, message: response.statusCode })
+                            res.json({success:false,message: response.statusCode })
                         } else {
-                            try {
-                                res.json({success:true,message:'project added',body}).status(response.statusCode)
-                            } catch (error) {
-                                res.json({ success: false, message: 'invalid response' })
+                            if (!body.error) {
+                                 // try {
+                                    res.json({success:true,message:body}).status(200)
+                                    // } catch (error) {
+                                    //     res.json({ success: false, message: 'invalid response' })
+                                    // }
+                            } else {
+                                res.json({success:false,message:body.error.data.message})
                             }
-  
+                          
+
                         }
                     }
   
@@ -191,7 +211,7 @@ module.exports = (router) => {
         } else {
             const param = req.body.cookie;
 
-            const url = "https://157.245.77.175:8070/api/res.partner/?session_id=" + param;
+            const url = "http://157.245.77.175:8070/api/res.partner/?session_id=" + param;
 
 
             request(
@@ -203,17 +223,21 @@ module.exports = (router) => {
                 },
                 function (error, response, body) {
                     if (error) {
-                        console.log(error);
-
+                      res.json({success:false,message:error})
                     } else {
                         if (response.statusCode != 200) {
-                            res.json({ success: false, message: response.statusCode })
+                            res.json({success:false,message: response.statusCode })
                         } else {
-                            try {
-                                res.json(JSON.parse(body)).status(200)
-                            } catch (error) {
-                                res.json({ success: false, message: 'invalid response' })
+                            if (!body.error) {
+                                 // try {
+                                    res.json({success:true,message:JSON.parse(body)}).status(200)
+                                    // } catch (error) {
+                                    //     res.json({ success: false, message: 'invalid response' })
+                                    // }
+                            } else {
+                                res.json({success:false,message:body.error.data.message})
                             }
+                          
 
                         }
 
@@ -232,7 +256,7 @@ module.exports = (router) => {
                 res.json({success:false,message:'Invalid session'}) 
             } else {
                 const param=req.body.cookie
-                const url = "https://157.245.77.175:8070/api/project.task/?session_id="+param;
+                const url = "http://157.245.77.175:8070/api/project.task/?session_id="+param;
                 const name = req.body.title;
               
                 const db = "demo12"
@@ -257,17 +281,20 @@ module.exports = (router) => {
                         } else {
       
                             //console.log(req.headers.cookie.trim());
-      
-      
                             if (response.statusCode != 200) {
-                                res.json({success:false, message: response.statusCode })
+                                res.json({success:false,message: response.statusCode })
                             } else {
-                                try {
-                                    res.json({success:true,message:'Task added',body}).status(response.statusCode)
-                                } catch (error) {
-                                    res.json({ success: false, message: 'invalid response' })
+                                if (!body.error) {
+                                     // try {
+                                        res.json({success:true,message:body}).status(200)
+                                        // } catch (error) {
+                                        //     res.json({ success: false, message: 'invalid response' })
+                                        // }
+                                } else {
+                                    res.json({success:false,message:body.error.data.message})
                                 }
-      
+                              
+    
                             }
                         }
       
