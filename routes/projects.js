@@ -8,7 +8,7 @@ module.exports = (router) => {
             if (!req.body.password) {
                 res.json({ success: false, message: 'password is required' })
             } else {
-                const url = "http://157.245.77.175:8070/web/session/authenticate/";
+                const url = "https://demo12.kylix.online/web/session/authenticate/";
                 const email = req.body.email;
                 const pass = req.body.password;
                 const db = "demo12"
@@ -31,16 +31,13 @@ module.exports = (router) => {
                            res.json({success:false,message:error})
 
                         } else {
-
-                       
-
-
                             if (response.statusCode != 200) {
                                 res.json({success:false,message: response.statusCode })
                             } else {
                                 if (!body.error) {
+                                   const cookie =response.headers["set-cookie"]                                 //    const cook=cookie.slice(0,50)
                                      // try {
-                                        res.json({success:true,message:body.result,session:response.headers}).status(200)
+                                        res.json({success:true,message:body.result,session:cookie}).status(200)
                                         // } catch (error) {
                                         //     res.json({ success: false, message: 'invalid response' })
                                         // }
