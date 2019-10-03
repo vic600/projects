@@ -29,12 +29,14 @@ module.exports = (router) => {
                     function (error, response, body) {
                         if (error) {
                            res.json({success:false,message:error})
-
+                              
+                                             
                         } else {
                             if (response.statusCode != 200) {
                                 res.json({success:false,message: response.statusCode })
                             } else {
                                 if (!body.error) {
+                                    
                                    const cookie =response.headers["set-cookie"]                                 //    const cook=cookie.slice(0,50)
                                      // try {
                                         res.json({success:true,message:body.result,session:cookie}).status(200)
