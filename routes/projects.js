@@ -37,9 +37,9 @@ module.exports = (router) => {
                             } else {
                                 if (!body.error) {
                                     
-                                   const cookie =response.headers["set-cookie"]                                 //    const cook=cookie.slice(0,50)
+                                  // const cookie =response.headers["set-cookie"]                                 //    const cook=cookie.slice(0,50)
                                      // try {
-                                        res.json({success:true,message:body.result,session:cookie}).status(200)
+                                        res.json({success:true,message:body.result,session:response.headers}).status(200)
                                         // } catch (error) {
                                         //     res.json({ success: false, message: 'invalid response' })
                                         // }
